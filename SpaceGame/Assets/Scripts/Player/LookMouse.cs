@@ -8,8 +8,10 @@ public class LookMouse : MonoBehaviour
 
     public Transform playerBody;
 
-    float xRotation = 0f;
+    public GameObject player;
 
+    float xRotation = 0f;
+    float yRotation = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -20,13 +22,24 @@ public class LookMouse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Getting Mouse Axis
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        playerBody.Rotate(Vector3.up * mouseX);
+        //Different Camera rotation when in space or not
+        if (playerMovement.isInSpace == false)
+        {
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            player.transform.Rotate(Vector3.up * mouseX);
+        }
+        else
+        {
+            transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+            player.transform.Rotate(Vector3.up * mouseX);
+            player.transform.Rotate(Vector3.right * -mouseY);
+        }
     }
 }

@@ -26,7 +26,7 @@ public class RayShield : MonoBehaviour
         if(playerRotate == true)
         {
             desiredRot = Quaternion.Euler(new Vector3(player.transform.eulerAngles.x, player.transform.eulerAngles.y, 0));
-            player.transform.rotation = Quaternion.Lerp(player.transform.rotation, desiredRot, Time.deltaTime);               
+            player.transform.rotation = Quaternion.Lerp(player.transform.localRotation, desiredRot, Time.deltaTime);               
         }
     }
 
@@ -41,10 +41,13 @@ public class RayShield : MonoBehaviour
             //Change de parent of the player
             if (playerMovement.isInSpace == false)
             {
-                other.transform.parent = GameObject.FindGameObjectWithTag("Ship").transform;
+                other.transform.SetParent(GameObject.FindGameObjectWithTag("Ship").transform, false);
 
-                //lets the player rotate.z go to 0
-                playerRotate = true;
+                other.transform.localScale = new Vector3(0.05f, 1f, 0.05f);
+                other.transform.localRotation = Quaternion.Euler(0, other.transform.rotation.y - 180, 0);
+
+                //Sets bool on true which starts the player rot lerp
+                //playerRotate = true;
             }
             else
             {               

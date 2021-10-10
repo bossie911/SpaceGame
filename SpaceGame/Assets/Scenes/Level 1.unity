@@ -359,7 +359,7 @@ PrefabInstance:
     - target: {fileID: 3421402630041806067, guid: e2e1ea9ebff183244811aa20a6d13f34,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2e1ea9ebff183244811aa20a6d13f34, type: 3}
@@ -640,6 +640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942feed7786186543875211c548e3c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRotate: 0
 --- !u!1 &912941037
 GameObject:
   m_ObjectHideFlags: 0

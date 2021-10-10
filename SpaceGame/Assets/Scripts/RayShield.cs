@@ -23,6 +23,10 @@ public class RayShield : MonoBehaviour
             if (playerMovement.isInSpace == false)
             {
                 other.transform.parent = GameObject.FindGameObjectWithTag("Ship").transform;
+
+                //Rotates the players z.rot to allign with the ship
+                Quaternion initialRot = Quaternion.Euler(new Vector3(0, 0, other.transform.eulerAngles.z));
+                other.transform.Rotate(0, 0, -initialRot.eulerAngles.z, Space.Self);
             }
             else
             {
